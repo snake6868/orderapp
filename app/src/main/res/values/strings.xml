@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">order002</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="name">%1$s</string>
+    <string name="price">%1$.1f元</string>
+</resources>
