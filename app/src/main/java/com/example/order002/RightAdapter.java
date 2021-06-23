@@ -2,13 +2,18 @@ package com.example.order002;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
@@ -16,16 +21,66 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 /**
  * Created by Vin on 08/12/2016.
  */
+class Form implements Serializable{
+    //private int fid;
+    private String fname;
+    private double fprice;
+    private int fnum;
+
+    public Form(String fname, double fprice, int fnum) {
+        this.fname = fname;
+        this.fprice = fprice;
+        this.fnum = fnum;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public double getFprice() {
+        return fprice;
+    }
+
+    public void setFprice(double fprice) {
+        this.fprice = fprice;
+    }
+
+    public int getFnum() {
+        return fnum;
+    }
+
+    public void setFnum(int fnum) {
+        this.fnum = fnum;
+    }
+}
+
+
 
 public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+
+
+    List<Form> list_form = new ArrayList<>();
 
     private Context mContext;
     private RightAdapterCallback mCallback;
     private List<Model.SubModel> mData;
 
     private LayoutInflater mInflater;
+    private double sum;
 
-    public RightAdapter(@NonNull Context mContext, @NonNull List<Model.SubModel> mData,@NonNull RightAdapterCallback callback) {
+    public double getSum() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
+    public RightAdapter(@NonNull Context mContext, @NonNull List<Model.SubModel> mData, @NonNull RightAdapterCallback callback) {
         this.mContext = mContext;
         this.mData = mData;
         this.mCallback = callback;
@@ -75,6 +130,8 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
 
+
+
         ViewHolder holder;
         if (null == view) {
             view = mInflater.inflate(R.layout.right_item,null);
@@ -85,27 +142,42 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
         }
 
         final Model.SubModel sm = mData.get(i);
-        holder.name.setText(String.format(holder.name.getText().toString(),sm.getName()));
-        holder.price.setText(String.format(holder.price.getText().toString(),sm.getprice()));
+        holder.name.setText(sm.getName());
+        //holder.price.setText(String.format(holder.price.getText().toString(),sm.getprice()));
+        holder.price.setText(sm.getprice()+"元");
         holder.num.setText(String.valueOf(sm.getNum()));
+
+
+        Form form = new Form(sm.getName(),sm.getprice(),sm.getNum());
 
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("ckfckf",i+":"+mData.get(i).getName());
+                sum+=sm.getprice();
+
                 mCallback.onClickNumButton(i,true);
+                list_form.add(form);
             }
         });
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (sm.getNum() > 0) {
+                    sum-=sm.getprice();
                     mCallback.onClickNumButton(i, false);
+                    list_form.remove(i);
                 }
             }
         });
 
         return view;
     }
+
+    List<Form>  getlist(){
+        return list_form;
+    }
+
 
 
     class ViewHolder {

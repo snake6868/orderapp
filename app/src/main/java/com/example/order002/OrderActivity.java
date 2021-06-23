@@ -1,22 +1,26 @@
 package com.example.order002;
 
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +41,11 @@ public class OrderActivity extends AppCompatActivity {
     StickyListHeadersListView mRightListView;
     RightAdapter mRightAdapter;
 
+    TextView tv_sum;
     List<Model> mModelList;
     List<Model.SubModel> mSubModelList;
 
+    Button btn_submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +59,10 @@ public class OrderActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.argb(100,0,0,0));
         }
 
+
         initData();
         initViews();
+
     }
 
     private void initData() {
@@ -74,6 +82,7 @@ public class OrderActivity extends AppCompatActivity {
 
     private void initViews() {
 
+        tv_sum=findViewById(R.id.tv_sum);
         mBg = (ImageView) findViewById(R.id.bg);
         mBg.setImageBitmap(Tools.blurBitmap(this, BitmapFactory.decodeResource(this.getResources(),R.drawable.bg),20));
 
@@ -90,11 +99,17 @@ public class OrderActivity extends AppCompatActivity {
 
 
         mRightListView = (StickyListHeadersListView) findViewById(R.id.right_list);
+
         mRightAdapter = new RightAdapter(this,mSubModelList,mCallback);
+
         mRightListView.setAdapter(mRightAdapter);
 
         mLeftListView.setOnTouchListener(new ListParentOnTouchListener(mDelegate));
         mRightListView.setOnTouchListener(new ListParentOnTouchListener(mDelegate));
+
+
+
+        tv_sum.setText("¥"+mRightAdapter.getSum());
 
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,6 +134,23 @@ public class OrderActivity extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
+            }
+        });
+        Intent intent =getIntent();
+        /*取出Intent中附加的数据*/
+        String username = intent.getStringExtra("username");
+        btn_submit=findViewById(R.id.btn_submit);
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Form>form_list = mRightAdapter.getlist();
+                Intent intent = new Intent();
+                intent.putExtra("formlist1",(Serializable)form_list);
+                intent.putExtra("sum",mRightAdapter.getSum()+"");
+                intent.putExtra("username",username+"");
+                intent.setClass(OrderActivity.this, FormActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -197,8 +229,13 @@ public class OrderActivity extends AppCompatActivity {
     RightAdapterCallback mCallback = new RightAdapterCallback() {
         @Override
         void onClickNumButton(int position, boolean isAdd) {
+
+
+            tv_sum.setText("¥"+mRightAdapter.getSum()+"");
+
             mSubModelList.get(position).setNum(mSubModelList.get(position).getNum() + (isAdd ? 1 : -1));
             mRightAdapter.update(position,mSubModelList.get(position));
+
             int leftPosition = getLeftPosition(mSubModelList.get(position).getcId());
             mModelList.get(leftPosition).setBadge(mModelList.get(leftPosition).getBadge() + (isAdd ? 1 : -1));
             mLeftAdapter.update(leftPosition,mModelList.get(leftPosition));

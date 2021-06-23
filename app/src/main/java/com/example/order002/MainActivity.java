@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 RadioButton rdb_user = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
                 if(rdb_user.getText().toString().equals("用户")) {
                     Intent intent = new Intent();
+
                     intent.setClass(MainActivity.this, RegisterActivity.class);
                     startActivity(intent);
                     finish();
@@ -77,8 +78,10 @@ public class MainActivity extends AppCompatActivity {
         String passWord=edit_password.getText().toString();
 
         if (login(userName,passWord)) {
+
             Toast.makeText(MainActivity.this, "用户登陆成功", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
+            intent.putExtra("username",userName+"");
             intent.setClass(MainActivity.this,OrderActivity.class);
             startActivity(intent);
             finish();

@@ -164,7 +164,7 @@ public class Model {
         yinpin.add(new SubModel("雪碧",4));
         yinpin.add(new SubModel("威海卫啤酒",4));
         yinpin.add(new SubModel("农夫山泉",3));
-        
+
 
         list.add(new Model(1,"    【夹馍】\n    正宗陕味",jiamo));
         list.add(new Model(2,"    【凉皮】\n    夹馍伴侣",liangpi));
