@@ -50,25 +50,25 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButtonuser"
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用户" />
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioButtonadmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="管理员" />
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/radioButtonuser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonadmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="管理员" />
+            </RadioGroup>
 
 
         <Button

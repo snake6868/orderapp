@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
 
     List<Form> list_form = new ArrayList<>();
-
+    private int j=0;
     private Context mContext;
     private RightAdapterCallback mCallback;
     private List<Model.SubModel> mData;
@@ -155,18 +156,28 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
             public void onClick(View view) {
                 Log.d("ckfckf",i+":"+mData.get(i).getName());
                 sum+=sm.getprice();
-
                 mCallback.onClickNumButton(i,true);
                 list_form.add(form);
+
             }
         });
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (sm.getNum() > 0) {
+                    //Log.d("ckfckf",i+":"+mData.get(i).getName());
                     sum-=sm.getprice();
                     mCallback.onClickNumButton(i, false);
-                    list_form.remove(i);
+                    //Log.d("ckfckf","num="+mData.get(i).getNum());
+                    for(int i=0;i<list_form.size();i++)
+                    {
+                        if(list_form.get(i).getFname().equals(sm.getName()))
+                        {
+                            list_form.remove(i);
+                            break;
+                        }
+                    }
                 }
             }
         });
