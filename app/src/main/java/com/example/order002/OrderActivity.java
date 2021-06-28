@@ -1,7 +1,10 @@
 package com.example.order002;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
@@ -30,6 +33,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class OrderActivity extends AppCompatActivity {
 
     ImageView mBg;
+    ImageView back;
 
     TextView mTitle,mSubTitle;
 
@@ -40,16 +44,18 @@ public class OrderActivity extends AppCompatActivity {
     LeftAdapter mLeftAdapter;
     StickyListHeadersListView mRightListView;
     RightAdapter mRightAdapter;
-
+    TextView youhui;
     TextView tv_sum;
     List<Model> mModelList;
     List<Model.SubModel> mSubModelList;
+    private MyDBHelper dbHelper;
 
     Button btn_submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        dbHelper = new MyDBHelper(this, "UserStore.db", null, 1);
 
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -107,9 +113,24 @@ public class OrderActivity extends AppCompatActivity {
         mLeftListView.setOnTouchListener(new ListParentOnTouchListener(mDelegate));
         mRightListView.setOnTouchListener(new ListParentOnTouchListener(mDelegate));
 
+        youhui = findViewById(R.id.order_youhui);
+        SQLiteDatabase db= dbHelper.getReadableDatabase();
 
+        Cursor cursor = db.query("youhuiData1", null, null, null, null, null, null);
+        double maxp=0,youhuip=0;
+
+        if(cursor.moveToLast())
+        {
+            maxp=cursor.getDouble(cursor.getColumnIndex("max"));
+            youhuip=cursor.getDouble(cursor.getColumnIndex("youhui"));
+            youhui.setText("满"+maxp+"减"+youhuip);
+        }
 
         tv_sum.setText("¥"+mRightAdapter.getSum());
+
+
+
+
 
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -153,6 +174,17 @@ public class OrderActivity extends AppCompatActivity {
                 finish();
             }
         });
+        back=findViewById(R.id.order_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(OrderActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private int getRightPosition(int leftPosition){

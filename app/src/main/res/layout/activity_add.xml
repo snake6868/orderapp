@@ -5,30 +5,28 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/meishi"/>
+        android:src="@drawable/add"/>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/yonghu"/>
+                android:layout_marginLeft="80dp"
+                android:src="@drawable/add"/>
             <EditText
-                android:id="@+id/ed_user"
+                android:id="@+id/ed_mealname"
                 android:layout_width="200dp"
-                android:hint="请输入用户名"
+                android:hint="请输入新菜的名字"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -42,37 +40,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="80dp"
-                android:src="@drawable/mima"/>
+                android:src="@drawable/add"/>
             <EditText
-                android:id="@+id/ed_password"
+                android:id="@+id/ed_mealprice"
                 android:layout_width="200dp"
-                android:hint="请输入密码"
-                android:inputType="textPassword"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="80dp"
-                android:src="@drawable/mima"/>
-            <EditText
-                android:id="@+id/ed_repassword"
-                android:layout_width="200dp"
-                android:hint="请再次输入密码"
-                android:inputType="textPassword"
+                android:hint="请输入新菜的价格"
+                android:numeric="decimal"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
 
         <Button
+            android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -85,6 +65,6 @@
             android:text="返回"
             android:id="@+id/btn_back"/>
 
-    </LinearLayout>
+
 
 </LinearLayout>

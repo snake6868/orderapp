@@ -17,6 +17,11 @@ public class MyDBHelper extends SQLiteOpenHelper{
             +"name text not null,"
             +"password text not null)";
 
+    public static final String CREATE_YOUHUIDATA1="create table youhuiData1(" +
+            "id integer primary key autoincrement,"
+            +"max double,"
+            +"youhui double)";
+
     private Context mContext;
 
     public MyDBHelper(Context context, String name, SQLiteDatabase.CursorFactory cursorFactory,int version){
@@ -27,6 +32,7 @@ public class MyDBHelper extends SQLiteOpenHelper{
     public  void onCreate(SQLiteDatabase db){
         db.execSQL(CREATE_USERDATA1);
         db.execSQL(CREATE_ADMINDATA1);
+        db.execSQL(CREATE_YOUHUIDATA1);
     }
 
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){

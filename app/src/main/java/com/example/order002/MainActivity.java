@@ -115,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (loginadmin(userName,passWord)) {
             Toast.makeText(MainActivity.this, "管理员登陆成功", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,AdminActivity.class);
+            startActivity(intent);
+            finish();
         }
         else {
             Toast.makeText(MainActivity.this, "管理员登陆失败", Toast.LENGTH_SHORT).show();

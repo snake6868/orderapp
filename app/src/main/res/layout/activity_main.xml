@@ -47,6 +47,7 @@
                 android:id="@+id/ed_password"
                 android:layout_width="200dp"
                 android:hint="请输入密码"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>

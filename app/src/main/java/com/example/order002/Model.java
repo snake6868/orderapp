@@ -165,6 +165,8 @@ public class Model {
         yinpin.add(new SubModel("威海卫啤酒",4));
         yinpin.add(new SubModel("农夫山泉",3));
 
+        List<SubModel> xinpin = new ArrayList<>();
+        xinpin.add(new SubModel("测试",5.5));
 
         list.add(new Model(1,"    【夹馍】\n    正宗陕味",jiamo));
         list.add(new Model(2,"    【凉皮】\n    夹馍伴侣",liangpi));
@@ -172,6 +174,7 @@ public class Model {
         list.add(new Model(4,"    【佐餐】\n    汤粥小吃",zuocan));
         list.add(new Model(5,"    【小料】\n    口味调节",xiaoliao));
         list.add(new Model(6,"    【饮品】\n    特色饮品",yinpin));
+        list.add(new Model(7,"    【新品】\n    新品上市",xinpin));
         return list;
     }
 }

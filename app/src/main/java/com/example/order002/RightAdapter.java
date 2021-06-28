@@ -151,11 +151,13 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
         Form form = new Form(sm.getName(),sm.getprice(),sm.getNum());
 
+
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("ckfckf",i+":"+mData.get(i).getName());
                 sum+=sm.getprice();
+
                 mCallback.onClickNumButton(i,true);
                 list_form.add(form);
 
