@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.io.Serializable;
+import java.util.List;
+
 public class AdminActivity extends AppCompatActivity {
     private LinearLayout add;
     private LinearLayout delete;
     private LinearLayout youhui;
+    private LinearLayout dingdan;
     private Button back;
 
     @Override
@@ -21,6 +25,7 @@ public class AdminActivity extends AppCompatActivity {
         add = findViewById(R.id.Lin_add);
         delete = findViewById(R.id.Lin_delete);
         youhui = findViewById(R.id.Lin_youhui);
+        dingdan = findViewById(R.id.Lin_dingdan);
         back = findViewById(R.id.admin_back);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +52,18 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(AdminActivity.this,YouhuiActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        dingdan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(AdminActivity.this,DingdanActivity.class);
+                List<Form> form = (List<Form>) getIntent().getSerializableExtra("formlist2");
+                intent.putExtra("formlist2",(Serializable)form);
                 startActivity(intent);
                 finish();
             }

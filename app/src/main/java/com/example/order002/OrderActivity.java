@@ -160,6 +160,7 @@ public class OrderActivity extends AppCompatActivity {
         Intent intent =getIntent();
         /*取出Intent中附加的数据*/
         String username = intent.getStringExtra("username");
+        String sum = intent.getStringExtra("sum");
         btn_submit=findViewById(R.id.btn_submit);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,11 +175,16 @@ public class OrderActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         back=findViewById(R.id.order_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent();
+                List<Form> form = (List<Form>) getIntent().getSerializableExtra("formlist2");
+                intent.putExtra("formlist2",(Serializable)form);
+
                 intent.setClass(OrderActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();

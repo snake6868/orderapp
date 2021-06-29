@@ -22,6 +22,11 @@ public class MyDBHelper extends SQLiteOpenHelper{
             +"max double,"
             +"youhui double)";
 
+    public static final String CREATE_FORMDATA1="create table formData1(" +
+            "id integer primary key autoincrement,"
+            +"user text not null,"
+            +"sum double)";
+
     private Context mContext;
 
     public MyDBHelper(Context context, String name, SQLiteDatabase.CursorFactory cursorFactory,int version){
@@ -33,6 +38,7 @@ public class MyDBHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_USERDATA1);
         db.execSQL(CREATE_ADMINDATA1);
         db.execSQL(CREATE_YOUHUIDATA1);
+        db.execSQL(CREATE_FORMDATA1);
     }
 
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){

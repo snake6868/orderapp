@@ -89,6 +89,34 @@
             android:src="@drawable/you"/>
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/Lin_dingdan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/dingdan"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="40dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:text="查看最新订单"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/you"/>
+    </LinearLayout>
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private Button btn_create;
     private Button btn_login;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new MyDBHelper(this, "UserStore.db", null, 1);
+
 
         radioGroup = findViewById(R.id.radioGroup);
         rdb_user = findViewById(R.id.radioButtonuser);
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     //点击登录按钮
     public void login() {
+
 
         edit_user=(EditText)findViewById(R.id.ed_user);
         edit_password=(EditText)findViewById(R.id.ed_password);
@@ -116,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
         if (loginadmin(userName,passWord)) {
             Toast.makeText(MainActivity.this, "管理员登陆成功", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
+            List<Form> form = (List<Form>) getIntent().getSerializableExtra("formlist2");
+            intent.putExtra("formlist2",(Serializable)form);
+
             intent.setClass(MainActivity.this,AdminActivity.class);
             startActivity(intent);
             finish();

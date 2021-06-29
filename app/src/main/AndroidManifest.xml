@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".YouhuiActivity"></activity>
+        <activity android:name=".DingdanActivity"></activity>
+        <activity android:name=".YouhuiActivity" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".AdminActivity" />

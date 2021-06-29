@@ -2,6 +2,7 @@ package com.example.order002;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,7 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +24,8 @@ public class FormActivity extends AppCompatActivity {
     TextView tv_sum;
     TextView tv_username;
     TextView tv_youhui;
-    RightAdapter mRightAdapter;
-    List<Model> mModelList;
-    List<Model.SubModel> mSubModelList;
     FormAdapter formAdapter;
+    Button submit;
     Button back;
     private MyDBHelper dbHelper;
     private ImageView youhuiquan;
@@ -70,12 +71,29 @@ public class FormActivity extends AppCompatActivity {
         tv_sum.setText("¥"+finalsum);
         tv_username.setText(username+"用户");
 
+        submit=findViewById(R.id.btn_submit);
+        double finalSum = finalsum;
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDatabase db= dbHelper.getWritableDatabase();
+                ContentValues values=new ContentValues();
 
+                values.put("user",username);
+                values.put("sum", finalSum);
+                db.insert("formData1",null,values);
+                db.close();
+                Toast.makeText(FormActivity.this,"订单提交成功",Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+                intent.putExtra("formlist2",(Serializable)form);
                 intent.setClass(FormActivity.this,OrderActivity.class);
                 intent.putExtra("username",username);
                 startActivity(intent);
